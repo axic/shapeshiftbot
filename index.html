@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Shapeshiftbot : Simple Ethereum contract to transfer Ether to Bitcoin addresses via Shapeshift.io">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Shapeshiftbot</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/axic/shapeshiftbot">View on GitHub</a>
+
+          <h1 id="project_title">Shapeshiftbot</h1>
+          <h2 id="project_tagline">Simple Ethereum contract to transfer Ether to Bitcoin addresses via Shapeshift.io</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/axic/shapeshiftbot/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/axic/shapeshiftbot/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>A simple Ethereum contract to transfer Ether to Bitcoin, via Ether transactions or from within other contracts.</p>
+
+<p>It is using Shapeshift.io for the actual exchange and Oraclize.it from the HTTP communication from within Ethereum.</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>It is really simple to use within a contract:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">import</span> <span class="pl-s"><span class="pl-pds">"</span>shapeshiftbot.api.sol<span class="pl-pds">"</span></span>
+contract Hello is usingShapeshift {
+  <span class="pl-k">function</span> <span class="pl-en">Hello</span>() {
+  }
+
+  <span class="pl-k">function</span> <span class="pl-en">test</span>(<span class="pl-smi">uint</span> <span class="pl-smi">value</span>, ,<span class="pl-smi">string</span> <span class="pl-smi">bitcoinAddress</span>) {
+    shapeshiftTransfer(value, <span class="pl-s"><span class="pl-pds">"</span>btc<span class="pl-pds">"</span></span>, bitcoinAddress);
+  }
+}</pre></div>
+
+<p>Read more in the repository README.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Shapeshiftbot maintained by <a href="https://github.com/axic">axic</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
