@@ -4,7 +4,7 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Shapeshiftbot : Simple Ethereum contract to transfer Ether to Bitcoin addresses via Shapeshift.io">
+    <meta name="description" content="Shapeshiftbot : Send Bitcoins easily from within the Ethereum network">
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
@@ -19,7 +19,7 @@
           <a id="forkme_banner" href="https://github.com/axic/shapeshiftbot">View on GitHub</a>
 
           <h1 id="project_title">Shapeshiftbot</h1>
-          <h2 id="project_tagline">Simple Ethereum contract to transfer Ether to Bitcoin addresses via Shapeshift.io</h2>
+          <h2 id="project_tagline">Send Bitcoins easily from within the Ethereum network</h2>
 
             <section id="downloads">
               <a class="zip_download_link" href="https://github.com/axic/shapeshiftbot/zipball/master">Download this project as a .zip file</a>
@@ -33,7 +33,7 @@
       <section id="main_content" class="inner">
         <p>A simple Ethereum contract to transfer Ether to Bitcoin, via Ether transactions or from within other contracts.</p>
 
-<p>It is using Shapeshift.io for the actual exchange and Oraclize.it from the HTTP communication from within Ethereum.</p>
+<p>It is using <a href="https://shapeshift.io/">Shapeshift.io</a> for the actual exchange and <a href="https://www.oraclize.it">Oraclize.it</a> from the HTTP communication from within Ethereum.</p>
 
 <h2>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
@@ -45,12 +45,19 @@ contract Hello is usingShapeshift {
   <span class="pl-k">function</span> <span class="pl-en">Hello</span>() {
   }
 
-  <span class="pl-k">function</span> <span class="pl-en">test</span>(<span class="pl-smi">uint</span> <span class="pl-smi">value</span>, ,<span class="pl-smi">string</span> <span class="pl-smi">bitcoinAddress</span>) {
+  <span class="pl-k">function</span> <span class="pl-en">test</span>(<span class="pl-smi">uint</span> <span class="pl-smi">value</span>, <span class="pl-smi">string</span> <span class="pl-smi">bitcoinAddress</span>) {
     shapeshiftTransfer(value, <span class="pl-s"><span class="pl-pds">"</span>btc<span class="pl-pds">"</span></span>, bitcoinAddress);
   }
 }</pre></div>
 
-<p>Read more in the repository README.</p>
+<p>In order to make this work, you need to put <a href="https://github.com/axic/shapeshiftbot/blob/master/shapeshiftbot.api.sol">shapeshiftbot.api.sol</a> in the same directory as your contract. The other Solidity sources are not needed from this project.</p>
+
+<p>I will periodically publish a new contract based on the changes in this repository and update the lookup contract. Please make a pull request instead of publishing a lot of copies of this contract on Ethereum.</p>
+
+<h2>
+<a id="how-does-this-actually-works" class="anchor" href="#how-does-this-actually-works" aria-hidden="true"><span class="octicon octicon-link"></span></a>How does this actually works?</h2>
+
+<p>For more information please read the <a href="https://github.com/axic/shapeshiftbot/blob/master/README.md">README</a>.</p>
       </section>
     </div>
 
