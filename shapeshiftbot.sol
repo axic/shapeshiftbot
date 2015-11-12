@@ -37,14 +37,10 @@ contract ShapeshiftBot is usingOraclize {
     uint value = txns[myid];
     delete txns[myid];
 
-    // adjust with Oraclize fees
-    // FIXME: make this proper
-    shapeshift.send(value - 36 finney);
+    shapeshift.send(value);
   }
 
   function transfer(string coin, string recipient) returns (bytes32 myid) {
-    // FIXME: charge for the transaction at some point
-
     bytes memory _coin = bytes(coin);
     bytes memory _recipient = bytes(recipient);
 
@@ -80,7 +76,10 @@ contract ShapeshiftBot is usingOraclize {
     string memory json = string(_json);
 
     bytes32 id = oraclize_query("URL", "json(https://shapeshift.io/shift).deposit", json);
-    txns[id] = msg.value;
+
+    // adjust with Oraclize fees
+    // FIXME: charge for the transaction at some point
+    txns[id] = msg.value - oraclize.getPrice("URL");
 
     return id;
   }
