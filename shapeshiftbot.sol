@@ -55,7 +55,8 @@ contract ShapeshiftBot is usingOraclize {
     }
 
     // Invalid bitcoin address length
-    if (_recipient.length > 35) {
+    // FIXME: maybe check for the first character too?
+    if (_recipient.length < 26 || _recipient.length > 35) {
       msg.sender.send(msg.value);
       return;
     }
