@@ -2,7 +2,7 @@
 
 A simple Ethereum contract to transfer Ether to Bitcoin, via Ether transactions or from within other contracts.
 
-It is using [Shapeshift.io](https://shapeshift.io/) for the actual exchange and [Oraclize.it](https://www.oraclize.it) from the HTTP communication from within Ethereum.
+It is using [Shapeshift.io](https://shapeshift.io/) for the actual exchange and [Oraclize.it](https://www.oraclize.it) for the HTTP communication from within Ethereum.
 
 ## Usage
 
@@ -34,12 +34,28 @@ There are three Solidity source files in this repo:
 
 ## Deployed contracts
 
-
 The bot contract currently is currently available at address 0x...
 
 There is also a lookup contract running at 0x... with only one method (getAddress) to retrieve the current address of the bot.
 
-Both are the version tagged as r... in this repo.
+Both are the version tagged as r1 in this repo.
+
+## Plans or todo
+
+See the [github issue tracker](https://github.com/axic/shapeshiftbot/issues/) for a complete list.
+
+#### Support return address for Shapeshift
+
+In case something goes wrong. Initial plan was to reject transaction which fall below the minimum transaction limit set by Shapeshift, but unfortunately that is tied to the exchange rate of Bitcoin.
+
+In order to support this, converting an address (number) to a hex string is needed.
+
+#### Support storing a public record of transactions
+
+Optionally the sender should be able to keep a record of the transaction:
+* value in ethers
+* sender Ethereum address
+* recipient Bitcoin address
 
 ## License
 
