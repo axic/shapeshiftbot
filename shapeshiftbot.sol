@@ -40,7 +40,42 @@ contract ShapeshiftBot is usingOraclize {
     shapeshift.send(value);
   }
 
+  function nibbleToChar(uint nibble) internal returns (uint ret) {
+    if (nibble > 9)
+      return nibble + 87; // nibble + 'a'- 10
+    else
+      return nibble + 48; // '0'
+  }
+
+  // basically this is an int to hexstring function, but limited to 160 bits
+  // FIXME: could be much simpler if we have a simple way of converting bytes32 to bytes or string
+  function addressToBytes(address _address) internal returns (bytes) {
+    uint160 tmp = uint160(_address);
+
+    // 40 bytes of space, but actually uses 64 bytes
+    string memory holder = "                                              ";
+    bytes memory ret = bytes(holder);
+
+    // NOTE: this is written in an expensive way, as out-of-order array access
+    //       is not supported yet, e.g. we cannot go in reverse easily
+    //       (or maybe it is a bug: https://github.com/ethereum/solidity/issues/212)
+    uint j = 0;
+    for (uint i = 0; i < 20; i++) {
+      uint _tmp = tmp / (2 ** (8*(19-i))); // shr(tmp, 8*(19-i))
+      uint nb1 = (_tmp / 0x10) & 0x0f;     // shr(tmp, 8) & 0x0f
+      uint nb2 = _tmp & 0x0f;
+      ret[j++] = byte(nibbleToChar(nb1));
+      ret[j++] = byte(nibbleToChar(nb2));
+    }
+
+    return ret;
+  }
+
   function transfer(string coin, string recipient) returns (bytes32 myid) {
+    return transfer(coin, recipient, false);
+  }
+
+  function transfer(string coin, string recipient, bool acceptReturn) returns (bytes32 myid) {
     bytes memory _coin = bytes(coin);
     bytes memory _recipient = bytes(recipient);
 
@@ -73,6 +108,16 @@ contract ShapeshiftBot is usingOraclize {
     uint i = 32;
     for (uint j = 0; j < _recipient.length; j++)
           _json[i++] = _recipient[j];
+    if (acceptReturn) {
+      string memory part2 = '","returnAddress":"0x';
+      bytes memory _part2 = bytes(part2);
+      for (j = 0; j < _part2.length; j++)
+        _json[i++] = _part2[j];
+
+      bytes memory _part3 = addressToBytes(msg.sender);
+      for (j = 0; j < _part3.length; j++)
+        _json[i++] = _part3[j];
+    }
     _json[i++] = 34;  // "
     _json[i++] = 125; // }
     // zero out the rest

@@ -1,5 +1,6 @@
 contract ShapeshiftBot {
   function transfer(string coin, string recipient) returns (bytes32 myid);
+  function transfer(string coin, string recipient, bool acceptReturn) returns (bytes32 myid);
 }
 
 contract ShapeshiftBotLookup {
