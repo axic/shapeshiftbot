@@ -57,10 +57,15 @@ contract ShapeshiftBot is usingOraclize {
       return;
     }
 
-    // FIXME: maybe check here for the "minimum" Ether accepted by Shapeshift?
+    // Reject if below the minimum Shapeshift limit
+    // FIXME: this depends on the Bitcoin mining fees, so not a good long-term limit
+    if (msg.value < 75 finney) {
+      msg.sender.send(msg.value);
+      return;
+    }
 
     // FIXME: all this because strings have pretty early support for in Solidity
-    //
+    // FIXME: include a return address
     // Let’s build up the JSON for Shapeshift:{"pair":"eth_btc","withdrawal":"1MCwBbhNGp5hRm5rC1Aims2YFRe2SXPYKt"}
     // JSON size is 69 bytes at most (+1 byte for zero termination)
     string memory part1 = '{"pair":"eth_btc","withdrawal":"                                      ';
