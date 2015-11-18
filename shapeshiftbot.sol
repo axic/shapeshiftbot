@@ -102,8 +102,8 @@ contract ShapeshiftBot is usingOraclize {
     // FIXME: all this because strings have pretty early support for in Solidity
     // FIXME: include a return address
     // Let’s build up the JSON for Shapeshift:{"pair":"eth_btc","withdrawal":"1MCwBbhNGp5hRm5rC1Aims2YFRe2SXPYKt"}
-    // JSON size is 69 bytes at most (+1 byte for zero termination)
-    string memory part1 = '{"pair":"eth_btc","withdrawal":"                                      ';
+    // JSON size is 69+61 bytes at most (+1 byte for zero termination)
+    string memory part1 = '{"pair":"eth_btc","withdrawal":"                                                                                                   ';
     bytes memory _json = bytes(part1);
     uint i = 32;
     for (uint j = 0; j < _recipient.length; j++)
