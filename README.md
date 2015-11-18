@@ -44,12 +44,6 @@ Both are the version tagged as r1 in this repo.
 
 See the [github issue tracker](https://github.com/axic/shapeshiftbot/issues/) for a complete list.
 
-#### Support return address for Shapeshift
-
-In case something goes wrong. Initial plan was to reject transaction which fall below the minimum transaction limit set by Shapeshift, but unfortunately that is tied to the exchange rate of Bitcoin.
-
-In order to support this, converting an address (number) to a hex string is needed.
-
 #### Support storing a public record of transactions
 
 Optionally the sender should be able to keep a record of the transaction:
