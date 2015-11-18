@@ -24,6 +24,19 @@ In order to make this work, you need to put shapeshiftbot.api.sol in the same di
 
 I will periodically publish a new contract based on the changes in this repository and update the lookup contract. Please make a pull request instead of publishing a lot of copies of this contract on Ethereum.
 
+## Solo mode
+
+Solo mode is about creating your own proxy contract for Bitcoin conversion.  This contract will try to convert Ethers every time a *simple transaction* is made.  Just send Ethers via any wallet app or via other contracts.
+
+In order to use:
+
+1. Deploy the ShapeshiftBotSolo contract (*shapeshiftbot.solo.sol*). Make sure to supply a Bitcoin address as a parameter when deploying.
+2. Transfer Ethers to the contract.
+
+If the ethers transferred are below a threshold, they will be sent at any future occasion when the threshold is exceeded.
+
+Note: right now processing happens when a transaction is made, that means the gas costs are expensed there.  Probably it will make more sense to just accept incoming transactions and not send them until the owner specifically requests it.
+
 ## Technical
 
 There are three Solidity source files in this repo:
